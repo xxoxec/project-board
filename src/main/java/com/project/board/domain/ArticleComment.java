@@ -4,21 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
 @ToString(callSuper = true)
 @Table(indexes = {
         @Index(columnList = "content"),
-        @Index(columnList = "createAt"),
-        @Index(columnList = "createBy")
+        @Index(columnList = "createdAt"),
+        @Index(columnList = "createdBy")
 })
 
 @Entity
@@ -26,6 +19,7 @@ public class ArticleComment extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
     @Setter @ManyToOne(optional = false) private Article article; // 게시글 (ID)
     @Setter @ManyToOne(optional = false) private UserAccount userAccount; // 유저 정보 (ID)
@@ -42,16 +36,18 @@ public class ArticleComment extends AuditingFields {
 
     public static ArticleComment of(Article article, UserAccount userAccount, String content) {
         return new ArticleComment(article, userAccount, content);
-    }
 
+    }
+  
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof ArticleComment that)) return false;
         return id != null && id.equals(that.id);
     }
-
+  
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id);
     }
 }
