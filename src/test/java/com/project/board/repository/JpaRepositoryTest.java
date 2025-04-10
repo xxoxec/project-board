@@ -36,6 +36,7 @@ class JpaRepositoryTest {
     @Test
     void givenTestData_whenSelecting_thenWorksFine() {
         // Given
+
         // When
         List<Article> articles = articleRepository.findAll();
         // Then

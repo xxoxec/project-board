@@ -1,6 +1,8 @@
 -- 테스트 계정
 -- TODO: 테스트용이지만 비밀번호가 노출된 데이터 세팅. 개선하는 것 고민.
-insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
+
+insert into user_account (user_id, user_password, nickname, email, memo, create_at, create_by, modified_at, modified_by) values
+
     ('xxo', '1412', 'xxo', 'xxo@mail.com', 'I am xxo.', now(), 'xxo', now(), 'xxo')
 ;
 
